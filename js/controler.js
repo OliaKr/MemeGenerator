@@ -1,10 +1,15 @@
 'use strict'
 
-var gImg;
-var gCurrtMeme;
-var gCanvas;
-var gCtx;
-var dataURL;
+var gImg
+var gCurrtMeme
+
+
+var dataURL
+
+let gCanvas = document.querySelector('#meme-canvas')
+let gCtx = gCanvas.getContext('2d')
+gCanvas.width = 450
+gCanvas.height = 450
 
 function onInit() {
     renderGallery()
