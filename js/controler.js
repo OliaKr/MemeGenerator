@@ -130,3 +130,10 @@ function OnGetEmailLink() {
 function toggleMenu() {
     document.body.classList.toggle('menu-open')
 }
+
+function onAddNewLine() {
+    document.querySelector('.userTxt').value = ''
+    addLine()
+    renderCanvas()
+    
+}

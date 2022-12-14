@@ -26,15 +26,32 @@ var gMeme = {
             align: 'left',
             color: 'red'
         },
-        {
-            txt: 'Try cabbage ',
-            size: 20,
-            align: 'left',
-            color: 'red'
-        }
+        // {
+        //     txt: 'Try cabbage ',
+        //     size: 20,
+        //     align: 'left',
+        //     color: 'red'
+        // }
     ]
 }
 
+
+function addLine() {
+    var line = {
+        txt: "Add some new text here",
+        size : 20,
+        align :'center',
+        font: 'impact',
+        innerColor: 'black',
+        strColor: "white"
+
+
+
+    }
+    gMeme.lines.push(line)
+    gMeme.selectedLineIdx++
+    
+}
 
 function getImgById() {
     console.log(img)
