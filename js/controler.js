@@ -43,12 +43,12 @@ function onCreateMeme(imgId) {
 function renderCanvas() {
     gCanvas = document.querySelector('#meme-canvas')
     gCtx = gCanvas.getContext('2d')
-    renderImg()
+    onDisplayMeme()
 }
 
-function renderImg(img) {
-    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
-}
+// function renderImg(img) {
+//     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+// }
 
 function onDisplayMeme(imgId) {
     var meme = getMeme()

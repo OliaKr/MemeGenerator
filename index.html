@@ -85,8 +85,16 @@
                         <option value="">Opel</option>
                         <option value="">Audi</option>
                     </select>
-                    <button onclick="onCenterText()" class="fa fa-strikethrough"></button>
-                    <button onclick="onCenterText()" class="fa palette">🎨</button>
+                    <button class="fa fa-strikethrough">
+                        <input class="control-color-input" type="color" oninput="onChangeStokeColor(value)"
+                            title="Choose Outline color">
+                        <span></span></button>
+                        
+                    <button class="fa palette"><input class="control-color-input" type="color"
+                        oninput="onChangeTextColor(value)" title="Choose color"
+                        data-trans="fill-color" /><span>🎨</span></button>
+                    </button>
+                    
                 </div>
                 <div class="stikers-container">
 
