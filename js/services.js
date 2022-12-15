@@ -122,43 +122,47 @@ var gImages = [
 
 var gMeme = {
     selectedImgId: 5,
-    selectedLineIdx: "0",
+    selectedLineIdx: 0,
     lines: [
         {
             txt: 'I sometimes eat falafel',
             size: 20,
             align: 'center',
-            innerColor: 'white',
+            innerColor: 'red',
             strColor:'black',
 
         },
-        {
-            txt: 'Try more ',
-            size: 20,
-            align: 'left',
-            color: 'red'
-        }
+        // {
+        //     txt: 'Try more ',
+        //     size: 20,
+        //     align: 'left',
+        //     color: 'red'
+        // }
     ]
 }
 
 
-// function addLine() {
-//     var line = {
-//         txt: "Try more",
-//         size : 20,
-//         align :'center',
-//         font: 'impact',
-//         innerColor: 'black',
-//         strColor: "white"
+//setting a meme
 
-//     }
-//     gMeme.lines.push(line)
-//     gMeme.selectedLineIdx++
-//     console.log('new line is line:', line);
+//adding a new line: 
+
+addLine()
+function addLine() {
+    var line = {
+        txt: "Try more",
+        size : 20,
+        align :'center',
+        font: 'impact',
+        innerColor: 'black',
+        strColor: "white"
+
+    }
+    gMeme.lines.push(line)
+    gMeme.selectedLineIdx++
+    console.log('new line is line:', line);
     
-// }
+}
 
-//set gMeme
 
 
 function changeSize(num) {
@@ -204,3 +208,24 @@ function getMeme() {
 function getImgs() {
     return gImages
 }
+
+///
+function getLineIdx() {
+    return gMeme.selectedLineIdx
+
+}
+// function setInnerColor() {
+//     var insideColor = gMeme.lines[selectedLineIdx].innerColor
+//     return insideColor
+    
+// }
+
+function setTxtColor(color) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].innerColor = color
+}
+
+function returnIdx() {
+    return gIdx
+}
+

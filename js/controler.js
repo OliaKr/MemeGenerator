@@ -2,6 +2,9 @@
 
 var gImg
 var gCurrtMeme
+var CurrLine;
+var gFont = 'Impact'
+///
 
 
 var dataURL
@@ -16,6 +19,9 @@ function onInit() {
     renderCanvas()
     gCanvas.width = 450
     gCanvas.height = 450
+    //text var 
+   
+   
 }
 
 
@@ -54,6 +60,10 @@ function renderMeme(imgId) {
 function onsendInput(elTxt) {
     var meme = getMeme()
     meme.lines[0].txt = elTxt.value
+    // var idx = returnIdx()
+    // meme.lines[idx].txt = elTxt.value
+    console.log('meme', meme);
+
     console.log(elTxt.value)
 
     drawText(elTxt.value, 30, 50)
@@ -64,7 +74,7 @@ function onsendInput(elTxt) {
 function drawText(text, x, y) {
     gCtx.lineWidth = 2;
     gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = 'white'
+    gCtx.fillStyle = 'red'
     gCtx.font = '40px IMPACT'
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
@@ -89,31 +99,58 @@ function onChangeTextSize(num) {
 
 }
 
-function onChangeTextClor(color) {
+// function onChangeTextClor(color) {
+//     editMeme('innerColor', color)
+//     renderMeme()
+    
+// }
+
+// function onChangeTextColor(color) {
+//     editMeme('innerColor', color)
+
+    
+// }
+
+function onChangeTextColor(color) {
     editMeme('innerColor', color)
     renderMeme()
-    
 }
-
-function onChangeTextColor(clr) {
-    // setTextColor()
-    renderCanvas()
-    
-}
-
-
 function onChangeStrokeColor(color) {
     editMeme('strColor', color)
-    renderCanvas()
+    renderMeme()
 
 }
+
+// function onChangeTextColor() {
+//     setInnerColor()
+//     renderMeme()
+    
+// }
 
 
 
 function onAddNewLine() {
     document.querySelector('.userTxt').value = ''
     addLine()
-    renderCanvas()
+    renderMeme()
 
 }
+
+//filter 
+function onFilterMemes(theme) {
+    var strHtml = ``
+    var imgs = getImgs()
+    var newImgs = imgs.filter((img) => {
+        var keyWords = img.keyWords
+        return keyWords.find(keyword => keyword.startsWith(theme.toLowerCase()))
+    })
+
+    newImgs.forEach(img => {
+        strHtml += `<img class="meme-image" src="${img.url}" id="${img.id}" onclick="onCreateMeme('${img.id}')">`
+    })
+    document.querySelector('.img-container').innerHTML = strHtml
+
+}
+
+
 
