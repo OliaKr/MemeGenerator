@@ -260,3 +260,9 @@ function moveLineUp(val) {
     gMeme.lines[lineIdx].positionY -= val
 }
 
+function moveLineDown(val) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].positionY -= val
+
+}
+

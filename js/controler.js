@@ -57,6 +57,10 @@ function onMoveLineUp(num) {
     renderMeme()
 }
 
+function onMoveLineDown(num) {
+    moveLineDown(num)
+    renderMeme()
+}
 
 
 function renderImg(img) {
