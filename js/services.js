@@ -255,4 +255,8 @@ function getImgs() {
     return gImages
 }
 
+function moveLineUp(val) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].positionY -= val
+}
 

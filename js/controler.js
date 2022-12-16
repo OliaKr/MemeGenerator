@@ -52,6 +52,12 @@ function onAlignText(pos) {
 }
 
 
+function onMoveLineUp(num) {
+    moveLineUp(num)
+    renderMeme()
+}
+
+
 
 function renderImg(img) {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
