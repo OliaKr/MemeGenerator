@@ -139,6 +139,13 @@ var gMeme = {
 
 }
 
+
+function switchFocus() {
+    if (gMeme.lines.length === 0) return
+    if (gMeme.selectedLineIdx === gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
+    else gMeme.selectedLineIdx++
+}
+
 function addLine() {
     var line = {
         txt: 'Add a new text here',

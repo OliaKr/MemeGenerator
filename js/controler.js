@@ -88,6 +88,12 @@ function renderText() {
     document.querySelector('.userTxt').value = currLine.txt
 }
 
+function onSwitchFocus() {
+    switchFocus()
+    renderMeme()
+}
+
+
 function drawText(currLine) {
     gCtx.lineWidth = 2
     gCtx.fillStyle = currLine.innerColor
