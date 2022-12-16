@@ -113,6 +113,8 @@ function onChangeTextSize(num) {
 
 function onChangeTextColor(color) {
     editMeme('innerColor', color)
+    
+
     renderMeme()
 }
 function onChangeStrokeColor(color) {
