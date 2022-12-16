@@ -1,144 +1,160 @@
 'use strict'
 
-var gImg
-var gCurrtMeme
-var CurrLine;
+var gImg;
+// var gCurrtMeme;
+const gCanvas = document.querySelector('#meme-canvas')
+const gCtx = gCanvas.getContext('2d')
 var gFont = 'Impact'
-///
-
-
-var dataURL
-
-let gCanvas = document.querySelector('#meme-canvas')
-let gCtx = gCanvas.getContext('2d')
 gCanvas.width = 450
 gCanvas.height = 450
+var CurrLine
+
+
+
 
 function onInit() {
     renderGallery()
-    renderCanvas()
-    gCanvas.width = 450
-    gCanvas.height = 450
-    //text var 
-   
-   
+    renderMeme()
 }
 
 
 function onCreateMeme(imgId) {
-    setPage()
     getSelectedImg(imgId)
-    var currImgId = getCurrImgId()
-    renderMeme(currImgId)
-    renderCanvas()
-}
-
-
-function renderCanvas() {
-    gCanvas = document.querySelector('#meme-canvas')
-    gCtx = gCanvas.getContext('2d')
     renderMeme()
-    onChangeTextSize
+    setPage()
 }
 
-// function renderImg(img) {
-//     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
-// }
 
-function renderMeme(imgId) {
-    var meme = getMeme()
-    var txt = meme.lines[0].txt
+function onChangeStokeColor(color) {
+    editMeme('strColor', color)
+    renderMeme()
+}
+
+function onChangeFont(value) {
+    changeFont(value)
+    renderMeme()
+}
+
+function onChangeTextSize(num) {
+    changeSize(num)
+    renderMeme()
+
+}
+
+function onChangeTextColor(color) {
+    editMeme('innerColor', color)
+    renderMeme()
+}
+
+function onAlignText(pos) {
+    alignText(pos)
+    renderMeme()
+}
+
+
+
+function renderImg(img) {
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+  
+}
+
+function renderMeme() {
     var meme = new Image()
-    meme.src = onGetMemeUrl(imgId)
+    meme.src = getMemeUrl()
     meme.onload = function () {
         gCtx.drawImage(meme, 0, 0, gCanvas.width, gCanvas.height)
-        drawText(txt, 10, 50)
+        renderText()
     }
 }
 
 
+function renderText() {
+    var meme = getMeme()
+    var idx = getLineIdx()
+    var currLine = meme.lines[idx]
+    var lines = meme.lines
+    if (lines.length === 0) return
+    meme.lines.forEach(line => drawText(line))
+    document.querySelector('.userTxt').value = currLine.txt
+}
+
+function drawText(currLine) {
+    gCtx.lineWidth = 2
+    gCtx.fillStyle = currLine.innerColor
+    gCtx.font = `${currLine.size}px ${gFont}`
+    gCtx.textAlign = currLine.align
+    gCtx.strokeStyle = currLine.strColor
+    gCtx.save()
+
+    var positionX = currLine.positionX
+    var positionY = currLine.positionY
+
+
+    gCtx.fillText(currLine.txt, positionX, positionY)
+    gCtx.restore()
+    gCtx.strokeText(currLine.txt, positionX, positionY)
+
+}
+
 function onsendInput(elTxt) {
     var meme = getMeme()
-    meme.lines[0].txt = elTxt.value
-    // var idx = returnIdx()
-    // meme.lines[idx].txt = elTxt.value
+    var idx = returnIdx()
+    meme.lines[idx].txt = elTxt.value
     console.log('meme', meme);
+    renderMeme()
+}
 
-    console.log(elTxt.value)
+// function onSwitchLines() {
 
-    drawText(elTxt.value, 30, 50)
+
+// }
+
+function onAddLine() {
+    document.querySelector('.userTxt').value = ''
+    addLine()
     renderMeme()
 }
 
 
-function drawText(text, x, y) {
-    gCtx.lineWidth = 2;
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = 'red'
-    gCtx.font = '40px IMPACT'
-    gCtx.fillText(text, x, y)
-    gCtx.strokeText(text, x, y)
-
+function onRemoveText() {
+    document.querySelector('.userTxt').value = ''
+    removeLine()
+    renderMeme()
 }
 
-function onGetMemeUrl(id) {
-    return getImgById(id).url
-}
+
+//delete the input once I click enter
+document.querySelector('#text').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        document.querySelector('.userTxt').value = ''
+    }
+})
 
 
 function setPage() {
     document.querySelector('.img-container').style.display = 'none'
     document.querySelector('.canvas-container').style.display = 'block'
     document.querySelector('.canvas-editors').style.display = 'block'
+    document.querySelector('.search-sec').style.display = 'none'
 }
 
-function onChangeTextSize(num) {
 
-    changeSize(num)
-    renderCanvas()
 
+//To keep track of the link we are on
+const activePage = window.location.pathname
+const navLinks = document.querySelectorAll('a').forEach(link => {
+    if (link.href.includes(`${activePage}`)) {
+        link.classList.add('active')
+    }
+})
+
+
+function onDisplayInputFile() {
+    document.querySelector('.file-input').style.display = 'block'
 }
 
-// function onChangeTextClor(color) {
-//     editMeme('innerColor', color)
-//     renderMeme()
-    
-// }
 
-// function onChangeTextColor(color) {
-//     editMeme('innerColor', color)
-
-    
-// }
-
-function onChangeTextColor(color) {
-    editMeme('innerColor', color)
-    
-
-    renderMeme()
-}
-function onChangeStrokeColor(color) {
-    editMeme('strColor', color)
-    renderMeme()
-
-}
-
-// function onChangeTextColor() {
-//     setInnerColor()
-//     renderMeme()
-    
-// }
-
-
-
-function onAddNewLine() {
-    document.querySelector('.userTxt').value = ''
-    addLine()
-    renderMeme()
-
-}
-
-//filter 
+//filter
 function onFilterMemes(theme) {
     var strHtml = ``
     var imgs = getImgs()
@@ -153,6 +169,9 @@ function onFilterMemes(theme) {
     document.querySelector('.img-container').innerHTML = strHtml
 
 }
+
+
+
 
 
 
