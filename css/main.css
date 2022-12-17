@@ -817,3 +817,14 @@
     color: #000;
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
+
+  .logo-img {
+    object-fit: cover;
+    height: 3vh;
+  }
+  
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
