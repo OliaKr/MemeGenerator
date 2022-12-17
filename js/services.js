@@ -1,27 +1,65 @@
 'use strict'
 
+
 var gMemes = []
 var gIdx = 0
-var gKeywords = {
-    'funny': 12,
-    'cat': 1,
-    'happy': 4,
-    'actor': 4,
-    'politician': 3,
-    'cute': 12,
-    'animals': 3,
-    'cartoon': 1,
-    'baby': 3,
-    'love': 1,
-    'sports': 2,
-    'dog': 2,
-    'sarcasm': 7,
-    'geeky': 2,
-    'scary': 1,
-    'bad': 1,
-    'ackward': 1
+
+
+var gKeywords = [
+
+    {
+        category: 'funny',
+        fontSize: 13
+    },
+    {
+        category: 'actor',
+        fontSize: 4
+    },
+    {
+        category: 'politician',
+        fontSize: 2
+    },
+    {
+        category: 'animals',
+        fontSize: 3
+    },
+    {
+        category: 'animation',
+        fontSize: 1
+    },
+    {
+        category: 'baby',
+        fontSize: 4
+    },
+    {
+        category: 'sports',
+        fontSize: 1
+    },
+    {
+        category: 'sarcasm',
+        fontSize: 9
+    }
+
+]
+    // 'funny': 12,
+    // 'cat': 1,
+    // 'happy': 4,
+    // 'actor': 4,
+    // 'politician': 3,
+    // 'cute': 12,
+    // 'animals': 3,
+    // 'animation': 1,
+    // 'baby': 3,
+    // 'love': 1,
+    // 'sports': 2,
+    // 'dog': 2,
+    // 'sarcasm': 7,
+    // 'geeky': 2,
+    // 'scary': 1,
+    // 'bad': 1,
+    // 'ackward': 1
     
-}
+
 
 
 var gImages = [
@@ -113,7 +151,7 @@ var gImages = [
     {
         id: 18,
         url: 'meme-imgs (square)/18.jpg',
-        keyWords: ['cartoon', 'funny']
+        keyWords: ['animation', 'funny']
     }
 ]
 
@@ -273,3 +311,16 @@ function moveLineDown(val) {
 
 }
 
+function modifyKeyWordSize(id) {
+    gKeywords[id].fontSize += 1
+}
+
+function getKeywordId(categary) {
+    return gKeywords.findIndex(function (keyWord) {
+        return keyWord.category === categary
+    })
+}
+
+function getKeyWords() {
+    return gKeywords
+}

@@ -171,20 +171,54 @@ function onDisplayInputFile() {
 
 
 //filter
+// function onFilterMemes(theme) {
+//     var strHtml = ``
+//     var imgs = getImgs()
+//     var newImgs = imgs.filter((img) => {
+//         var keyWords = img.keyWords
+//         return keyWords.find(keyword => keyword.startsWith(theme.toLowerCase()))
+//     })
+
+//     newImgs.forEach(img => {
+//         strHtml += `<img class="meme-image" src="${img.url}" id="${img.id}" onclick="onCreateMeme('${img.id}')">`
+//     })
+//     document.querySelector('.img-container').innerHTML = strHtml
+
+// }
+
+function onclickFilter(theme) {
+    onFilterMemes(theme)
+    renderKeyWords()
+}
+
+
 function onFilterMemes(theme) {
-    var strHtml = ``
-    var imgs = getImgs()
-    var newImgs = imgs.filter((img) => {
-        var keyWords = img.keyWords
+    let strHtml = ``
+    const imgs = getImgs()
+    const keyWords = getKeyWords()
+    const keyWordIdx = getKeywordId(theme)
+    if (keyWords[keyWordIdx].category === theme) modifyKeyWordSize(keyWordIdx)
+    let newImgs = imgs.filter((img) => {
+        const keyWords = img.keyWords
         return keyWords.find(keyword => keyword.startsWith(theme.toLowerCase()))
     })
-
     newImgs.forEach(img => {
         strHtml += `<img class="meme-image" src="${img.url}" id="${img.id}" onclick="onCreateMeme('${img.id}')">`
     })
     document.querySelector('.img-container').innerHTML = strHtml
-
 }
+
+//render Keywords
+function renderKeyWords() {
+    const keyWords = getKeyWords()
+    let btnHtml = ''
+    keyWords.map(function (keyWord) {
+        btnHtml += `<button data-trans=${keyWord.category} class="filter-btn" style="font-size: ${keyWord.fontSize + 10}px;" onclick="onclickFilter(this.innerHTML)">${keyWord.category}</button>`
+    })
+    document.querySelector('.search-words').innerHTML = btnHtml
+}
+
+
 
 
 
