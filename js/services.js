@@ -155,6 +155,58 @@ var gImages = [
     }
 ]
 
+let gStickers = [
+    {
+        id: 1,
+        url: 'stickers/2.png',
+        positionX: 200,
+        positionY: 200,
+        isDragging: false,
+        height: 12,
+        width: 75
+
+    },
+    {
+        id: 2,
+        url: 'stickers/5.png',
+        positionX: 200,
+        positionY: 200,
+        isDragging: false,
+        height: 12,
+        width: 85
+
+    },
+    {
+        id: 3,
+        url: 'stickers/6.png',
+        positionX: 200,
+        positionY: 200,
+        isDragging: false,
+        height: 12,
+        width: 85
+
+    },
+    {
+        id: 4,
+        url: 'stickers/7.png',
+        positionX: 200,
+        positionY: 200,
+        isDragging: false,
+        height: 12,
+        width: 85
+    },
+    {
+        id: 5,
+        url: 'stickers/8.png',
+        positionX: 200,
+        positionY: 200,
+        isDragging: false,
+        height: 12,
+        width: 85
+
+    }
+]
+
 
 
 
@@ -216,6 +268,11 @@ function changeFont(font) {
 function getLineIdx() {
     return gMeme.selectedLineIdx
 }
+
+function getStickers(){
+    return gStickers
+}
+
 
 
 function getMemeText(lineIdx) {

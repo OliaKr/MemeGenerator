@@ -15,6 +15,7 @@ var CurrLine
 function onInit() {
     renderGallery()
     renderMeme()
+    renderKeyWords()
 }
 
 

@@ -278,13 +278,14 @@
     grid-row: 4/5;
   }
   
-  .stikers-container {
+  .stickers-container {
     display: grid;
     grid-column: 1/6;
     grid-row: 5/6;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 30px;
-    border: 1px black solid;
+    grid-template-rows: 10px;
+    /* border: 1px black solid; */
+    border-radius: 2px;
   }
   
   .save-btns {
