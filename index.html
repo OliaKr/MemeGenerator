@@ -4,27 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
     <title>MemeGenerator</title>
 </head>
 
 <body onload="onInit()">
+
     <header class="navbar flex space-between">
         <div class="logo">
             <h1 class="heading">Memegenerator</h1>
-            <h4 class="sub-heading">Your Memes</h4>
+            <h5 class="sub-heading">Your Memes</h5>
         </div>
         <nav class="navbar topnav flex">
-            <ul class="main-nav flex clean-list flex space-between align-center">
-                <li><a href="index.html">Gallery</a></li>
-                <li><a href="memes.html">Memes</a></li>
-                <li><a href="about.html">About</a></li>
-                <li class="dropdown">Language<span class="fa fa-angle-double-down"></span>
+            <ul class="main-nav flex clean-list  space-between align-center">
+                <li><a onclick="onMoveToGalery()" data-trans="galery">Gallery</a></li>
+                <li><a onclick="onMoveToMemePage()" data-trans="memes">Memes</a></li>
+                <li><a onclick="onMoveToAboutPage()" data-trans="about">About</a></li>
+                <li data-trans="language" class="dropdown">Language<span class="fa fa-angle-double-down"></span>
                     <ul class="dropbtn dropdown-content clean-list ">
-                        <li><a onclick="onSetLang('EN')">English</a></li>
-                        <li><a onclick="onSetLang('HE')">Hebrew</a></li>
+                        <li><a data-trans="english" onclick="onSetLang('en')">English</a></li>
+                        <li><a data-trans="hebrew" onclick="onSetLang('he')">עברית</a></li>
                     </ul>
                 </li>
             </ul>
@@ -35,15 +37,15 @@
 
     <section class="search-sec main-layout">
         <div class="search-box">
-            <input class="input-bar" type="text" list="theme-search" placeholder="Search a category...."
-                onkeyup="onclickFilter(value)">
+            <input class="input-bar" type="text" list="theme-search" data-trans="inputSearch"
+                placeholder="Search a category...." onkeyup="onclickFilter(value)">
             <span class="fa fa-search"></span>
             <datalist id="theme-search">
-                <option value="funny">
-                <option value="animal">
-                <option value="bad">
-                <option value="awkward">
-                <option value="happy">
+                <option data-trans="funny" value="funny">
+                <option data-trans="animal" value="animal">
+                <option data-trans="bad" value="bad">
+                <option data-trans="awkward" value="awkward">
+                <option data-trans="happy" value="happy">
             </datalist>
         </div>
         <div class="search-words">
@@ -57,17 +59,15 @@
     </section> -->
 
 
-    <section class="editor-container main-layout">
-        <div class="canvas-container hidden">
-            <canvas id="meme-canvas" height="450" width="450">
+    <section class="editor-container main-layout hidden">
+        <div class="canvas-container hidden flex">
+            <canvas id="meme-canvas" height="400" width="400">
             </canvas>
         </div>
         <div class="canvas-editors hidden">
             <div class="editors main-layout">
-                <input class="userTxt" type="text" id="text" placeholder="Create something!" oninput="onsendInput(this)">
-                <button class="fa fa-upload" onclick="onDisplayInputFile()">
-                    <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
-                </button>
+                <input class="userTxt" type="text" id="text" placeholder="  Create something!"
+                    oninput="onsendInput(this.value)">
                 <div class="btn-gr1">
                     <button value="UP" onclick="onMoveLineUp(4)" class="fa fa-arrow-up"></button>
                     <button value="DOWN" onclick="onMoveLineDown(-4)" class="fa fa-arrow-down"></button>
@@ -81,23 +81,21 @@
                     <button onclick="onAlignText('right')" class="fa fa-align-left "></button>
                     <button onclick="onAlignText('center')" class="fa fa-align-center "></button>
                     <button onclick="onAlignText('left')" class="fa  fa-align-right"></button>
-                    <select id="fonts" class="fonts-selection" onchange="onChangeFont(value)">
-                        <option>Impact</option>
-                        <option>Times New Roman</option>
-                        <option>Verdana</option>
+                    <select data-trans="font" id="fonts" class="fonts-selection" onchange="onChangeFont(value)">
+                        <option data-trans="font1">Impact</option>
+                        <option data-trans="font2">Times New Roman</option>
+                        <option data-trans="font3">Verdana</option>
                     </select>
                     <button class="fa fa-strikethrough">
-                        <input class="control-color-input" type="color" oninput="onChangeStokeColor(value)"
+                        <input class="control-color-input" type="color" oninput="onChangeOutlineColor(value)"
                             title="Choose Outline color">
                         <span></span></button>
-                    <button class="fa palette"><input class="control-color-input" type="color"
-                            oninput="onChangeTextColor(value)" title="Choose color"
-                            data-trans="fill-color" /><span>🎨</span></button>
+                    <button class="fa palette"><span>🎨</span><input class="control-color-input" type="color"
+                            oninput="onChangeFillColor(value)" title="Choose color" /></button>
                 </div>
-               <section class="stickers-container">
-                
-               </section>
-                </div>
+
+                <section class="stickers-container">
+                </section>
                 <div class="save-btns">
                     <button onclick="shareToExternalSorce()" class="fc-btn share-container "><span
                             class="fa fa-facebook"></span></button>
@@ -110,21 +108,79 @@
     </section>
 
 
+    <section class="about-page hidden">
+        <main class="about-container flex">
+            <img class="about-img" src="aboutImg/my-img (12).jpg" alt="">
+            <div class="about-me">
+                <p data-trans="about-me" class="about-txt">Hello, my name is <span class="creator-name">Olia
+                        Krasilnikov</span>.
+                    I'm a Full Stack Web Developer student at Coding Academy, skilled in JavaScript language and with
+                    applying the top WEB technologies.
+                    I'm an effective team player, hard worker and self-learner.
+                </p>
+                <section class="by-socials">
+                    <p data-trans="contact"> You can contact me at:</p>
+                    <ul class="flex clean-list">
+                        <li> <a href="https://www.facebook.com/profile.php?id=100010372724389" target="_blank">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/olga-krasilnikov-68b66322b/" target="_blank">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/OliaKr" target="_blank">
+                                <i class="fa fa-github"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/olia_kass/" target="_blank">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                </section>
+            </div>
+        </main>
+    </section>
+
+
+    <section class="save-meme-container hidden">
+        <h1 data-trans="edited-memes" class="edited-memes">Your memes</h1>
+    </section>
+
+
 
     <footer class="footer">
-        <h4 class="logo">MemeGenerator</h4>
-        <p>Presented By Olia Krasilnikov</a></p>
-        <p>&copy; Copyright 2022, All Right Reserved</p>
+        <h4 class="logo">Memegenerator</h4>
+        <p data-trans="presented-by">Presented By <a class="creator-name" onclick="onMoveToAboutPage()">Olia Krasilnikov</a>
+        </p>
+        <p data-trans="copyrights">&copy; Copyright 2022, All Right Reserved</p>
     </footer>
 
 
-    <script src="js/utilitis.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/exp-inp.js"></script>
-    <script src="js/controler.js"></script>
-    <script src="js/galleryController.js"></script>
-    <script src="js/services.js"></script>
 
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close fa fa-close"></span>
+            <p class="modal-txt">This frature is currently in the development and will be upploaded shortly.
+            </p>
+        </div>
+
+    </div>
+
+
+
+
+    <script src="js/utilitis.js"></script>
+    <script src="js/translation.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/controler.js"></script>
+    <script src="js/meme.controler.js"></script>
+    <script src="js/services.js"></script>
 
 </body>
 
