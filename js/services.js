@@ -14,7 +14,7 @@ let gKeywords = [
         fontSize: 4
     },
     {
-        category: 'politician',
+        category: 'politics',
         fontSize: 2
     },
     {

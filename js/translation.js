@@ -58,7 +58,7 @@ var gTrans = {
         he: 'שמח'
     },
     politic: {
-        en: 'politics',
+        en: 'politic',
         he: 'פוליטיקה'
     },
     celebrity: {
