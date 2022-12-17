@@ -16,6 +16,7 @@ function onInit() {
     renderGallery()
     renderMeme()
     renderKeyWords()
+    renderStickers()
 }
 
 
@@ -219,6 +220,17 @@ function renderKeyWords() {
     document.querySelector('.search-words').innerHTML = btnHtml
 }
 
+
+function renderStickers() {
+    const stikers = getStickers()
+    console.log(stikers)
+    let stickerHtml = stikers.map(function (sticker) {
+        return `
+        <img class="sticker-image" src="${sticker.url}" id="${sticker.id}" onclick="onOpenModal()">
+       `
+    })
+    document.querySelector('.stickers-container').innerHTML = stickerHtml.join('')
+}
 
 
 
