@@ -188,13 +188,13 @@ let gStickers = [
 
 
 let gMeme = {
-    selectedImgId: 1,
+    selectedImgId: 5,
     selectedLineIdx: 0,
     lines: [
         {
             txt: '',
             font: 'Impact',
-            size: 26,
+            size: 28,
             align: 'center',
             innerColor: 'white',
             strColor: 'black',
@@ -204,7 +204,7 @@ let gMeme = {
         },
         {
             txt: 'Add text here',
-            size: 26,
+            size: 28,
             font: 'Impact',
             align: 'center',
             innerColor: 'white',
@@ -231,7 +231,7 @@ function switchFocus() {
 function addLine() {
     let line = {
         txt: '',
-        size: 26,
+        size: 28,
         align: 'center',
         font: 'impact',
         innerColor: 'white',
